@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = process.env.VITE_APP_API_URL;
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
@@ -103,4 +103,5 @@ export const useAuthStore = create((set, get) => ({
     if (get().socket?.connected) get().socket.disconnect();
   },
 }));
+
 
