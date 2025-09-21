@@ -2,7 +2,7 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axios";
 import { useAuthStore } from "./useAuthStore";
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = process.env.VITE_APP_API_URL;
 
 export const useChatStore = create((set, get) => ({
   messages: [],
@@ -67,4 +67,5 @@ export const useChatStore = create((set, get) => ({
 
   setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));
+
 
