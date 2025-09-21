@@ -2,7 +2,7 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axios";
 import { useAuthStore } from "./useAuthStore";
-const BASE_URL = process.env.VITE_APP_API_URL;
+
 
 export const useChatStore = create((set, get) => ({
   messages: [],
@@ -14,7 +14,7 @@ export const useChatStore = create((set, get) => ({
   getUsers: async () => {
     set({ isUsersLoading: true });
     try {
-      const res = await axiosInstance.get(`${BASE_URL}/messages/users`);
+      const res = await axiosInstance.get(`/messages/users`);
       set({ users: res.data });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -26,7 +26,7 @@ export const useChatStore = create((set, get) => ({
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     try {
-      const res = await axiosInstance.get(`${BASE_URL}/messages/${userId}`);
+      const res = await axiosInstance.get(`/messages/${userId}`);
       set({ messages: res.data });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -37,7 +37,7 @@ export const useChatStore = create((set, get) => ({
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     try {
-      const res = await axiosInstance.post(`${BASE_URL}/messages/send/${selectedUser._id}`, messageData);
+      const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
       set({ messages: [...messages, res.data] });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -67,5 +67,6 @@ export const useChatStore = create((set, get) => ({
 
   setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));
+
 
 
